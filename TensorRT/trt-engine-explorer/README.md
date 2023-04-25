@@ -1,5 +1,4 @@
 # trt-engine-explorer
-
 ![](images/trex.png)
 
 This repository contains Python code (`trex` package) to explore various aspects of a TensorRT engine plan and its associated inference profiling data.
@@ -7,6 +6,9 @@ This repository contains Python code (`trex` package) to explore various aspects
 An engine plan file is a serialized TensorRT engine format. It contains information about the final inference graph and can be deserialized for inference runtime execution.  An engine plan is specific to the hardware and software versions of the system used to build the engine.
 
 `trex` is useful for initial model performance debugging, visualization of plan graphs, and for understanding the characteristics of an engine plan. <b>For in-depth performance analysis, [Nvidia &reg; Nsight Systems &trade;](https://developer.nvidia.com/nsight-systems) is the recommended performance analysis tool.</b>
+
+# Source repo
+
 
 # Features
 The `trex` package contains an API and Jupyter notebooks for viewing and inspecting TensorRT engine-plan files and profiling data.
