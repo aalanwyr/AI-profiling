@@ -1,0 +1,2372 @@
+{"Layers": [{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to node_of_gpu_0/conv1_1 + node_of_gpu_0/res_conv1_bn_1 + node_of_gpu_0/res_conv1_bn_2 + node_of_gpu_0/pool1_1",
+  "LayerType": "Reformat",
+  "Inputs": [
+  {
+    "Name": "gpu_0/data_0",
+    "Location": "Device",
+    "Dimensions": [1,3,224,224],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to node_of_gpu_0/conv1_1 + node_of_gpu_0/res_conv1_bn_1 + node_of_gpu_0/res_conv1_bn_2 + node_of_gpu_0/pool1_1",
+    "Location": "Device",
+    "Dimensions": [1,3,224,224],
+    "Format/Datatype": "Row major Int8 format"
+  }],
+  "ParameterType": "Reformat",
+  "Origin": "REFORMAT",
+  "TacticValue": "0x0000000000000000"
+},{
+  "Name": "node_of_gpu_0/conv1_1 + node_of_gpu_0/res_conv1_bn_1 + node_of_gpu_0/res_conv1_bn_2 + node_of_gpu_0/pool1_1",
+  "LayerType": "CaskConvActPool",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to node_of_gpu_0/conv1_1 + node_of_gpu_0/res_conv1_bn_1 + node_of_gpu_0/res_conv1_bn_2 + node_of_gpu_0/pool1_1",
+    "Location": "Device",
+    "Dimensions": [1,3,224,224],
+    "Format/Datatype": "Row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/pool1_1",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "ConvActPool",
+  "ConvParameterType": "Convolution",
+  "ConvKernel": [7,7],
+  "ConvPaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "ConvPrePadding": [3,3],
+  "ConvPostPadding": [3,3],
+  "ConvStride": [2,2],
+  "ConvDilation": [1,1],
+  "ConvOutMaps": 64,
+  "ConvGroups": 1,
+  "ConvWeights": {"Type": "Int8", "Count": 9408},
+  "ConvBias": {"Type": "Float", "Count": 64},
+  "ConvHasSparseWeights": 0,
+  "ConvHasDynamicFilter": 0,
+  "ConvHasDynamicBias": 0,
+  "ConvHasResidual": 0,
+  "ConvConvXAsActInputIdx": -1,
+  "ConvBiasAsActInputIdx": -1,
+  "ConvResAsActInputIdx": -1,
+  "ConvActivation": "RELU",
+  "PoolingParameterType": "Pooling",
+  "PoolingPoolingType": "MAX",
+  "PoolingWindowSize": [3,3],
+  "PoolingPaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PoolingPrePadding": [1,1],
+  "PoolingPostPadding": [1,1],
+  "PoolingStride": [2,2],
+  "PoolingBlendFactor": 0,
+  "PoolingAverageCountExcludesPadding": 1,
+  "TacticValue": "0xc5730a6ceacd8913"
+},{
+  "Name": "node_of_gpu_0/res2_0_branch2a_1 + node_of_gpu_0/res2_0_branch2a_bn_1 + node_of_gpu_0/res2_0_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/pool1_1",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 4096},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res2_0_branch2b_1 + node_of_gpu_0/res2_0_branch2b_bn_1 + node_of_gpu_0/res2_0_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 36864},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xbb88763c3b0e94d4"
+},{
+  "Name": "node_of_gpu_0/res2_0_branch1_1 + node_of_gpu_0/res2_0_branch1_bn_1",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/pool1_1",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 16384},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "HasBias": 1,
+  "HasReLU": 0,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x128x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x764ba04bb839d539"
+},{
+  "Name": "node_of_gpu_0/res2_0_branch2c_1 + node_of_gpu_0/res2_0_branch2c_bn_1 + node_of_gpu_0/res2_0_branch2c_bn_2 + node_of_gpu_0/res2_0_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res2_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 16384},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res2_1_branch2a_1 + node_of_gpu_0/res2_1_branch2a_bn_1 + node_of_gpu_0/res2_1_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 16384},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res2_1_branch2b_1 + node_of_gpu_0/res2_1_branch2b_bn_1 + node_of_gpu_0/res2_1_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 36864},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xbb88763c3b0e94d4"
+},{
+  "Name": "node_of_gpu_0/res2_1_branch2c_1 + node_of_gpu_0/res2_1_branch2c_bn_1 + node_of_gpu_0/res2_1_branch2c_bn_2 + node_of_gpu_0/res2_1_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res2_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 16384},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res2_2_branch2a_1 + node_of_gpu_0/res2_2_branch2a_bn_1 + node_of_gpu_0/res2_2_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 16384},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res2_2_branch2b_1 + node_of_gpu_0/res2_2_branch2b_bn_1 + node_of_gpu_0/res2_2_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 64,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 36864},
+  "Bias": {"Type": "Float", "Count": 64},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xbb88763c3b0e94d4"
+},{
+  "Name": "node_of_gpu_0/res2_2_branch2c_1 + node_of_gpu_0/res2_2_branch2c_bn_1 + node_of_gpu_0/res2_2_branch2c_bn_2 + node_of_gpu_0/res2_2_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,64,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res2_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 16384},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res3_0_branch2a_1 + node_of_gpu_0/res3_0_branch2a_bn_1 + node_of_gpu_0/res3_0_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 32768},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res3_0_branch2b_1 + node_of_gpu_0/res3_0_branch2b_bn_1 + node_of_gpu_0/res3_0_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [2,2],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 147456},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xd3f592fae61c7986"
+},{
+  "Name": "node_of_gpu_0/res3_0_branch1_1 + node_of_gpu_0/res3_0_branch1_bn_1",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res2_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,256,56,56],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 131072},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "HasBias": 1,
+  "HasReLU": 0,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_t1r1s1",
+  "TacticValue": "0xfa5f2e15625aa266"
+},{
+  "Name": "node_of_gpu_0/res3_0_branch2c_1 + node_of_gpu_0/res3_0_branch2c_bn_1 + node_of_gpu_0/res3_0_branch2c_bn_2 + node_of_gpu_0/res3_0_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res3_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res3_1_branch2a_1 + node_of_gpu_0/res3_1_branch2a_bn_1 + node_of_gpu_0/res3_1_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/res3_1_branch2b_1 + node_of_gpu_0/res3_1_branch2b_bn_1 + node_of_gpu_0/res3_1_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 147456},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xd3f592fae61c7986"
+},{
+  "Name": "node_of_gpu_0/res3_1_branch2c_1 + node_of_gpu_0/res3_1_branch2c_bn_1 + node_of_gpu_0/res3_1_branch2c_bn_2 + node_of_gpu_0/res3_1_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res3_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res3_2_branch2a_1 + node_of_gpu_0/res3_2_branch2a_bn_1 + node_of_gpu_0/res3_2_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/res3_2_branch2b_1 + node_of_gpu_0/res3_2_branch2b_bn_1 + node_of_gpu_0/res3_2_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 147456},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xd3f592fae61c7986"
+},{
+  "Name": "node_of_gpu_0/res3_2_branch2c_1 + node_of_gpu_0/res3_2_branch2c_bn_1 + node_of_gpu_0/res3_2_branch2c_bn_2 + node_of_gpu_0/res3_2_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res3_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res3_3_branch2a_1 + node_of_gpu_0/res3_3_branch2a_bn_1 + node_of_gpu_0/res3_3_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/res3_3_branch2b_1 + node_of_gpu_0/res3_3_branch2b_bn_1 + node_of_gpu_0/res3_3_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 128,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 147456},
+  "Bias": {"Type": "Float", "Count": 128},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0xd3f592fae61c7986"
+},{
+  "Name": "node_of_gpu_0/res3_3_branch2c_1 + node_of_gpu_0/res3_3_branch2c_bn_1 + node_of_gpu_0/res3_3_branch2c_bn_2 + node_of_gpu_0/res3_3_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,128,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res3_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 65536},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize96x64x64_stage3_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x483ad1560c6e5e27"
+},{
+  "Name": "node_of_gpu_0/res4_0_branch2a_1 + node_of_gpu_0/res4_0_branch2a_bn_1 + node_of_gpu_0/res4_0_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 131072},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res4_0_branch2b_1 + node_of_gpu_0/res4_0_branch2b_bn_1 + node_of_gpu_0/res4_0_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [2,2],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 589824},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res4_0_branch1_1 + node_of_gpu_0/res4_0_branch1_bn_1",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res3_3_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,512,28,28],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 524288},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "HasBias": 1,
+  "HasReLU": 0,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r1s1",
+  "TacticValue": "0x311b82feb19aef19"
+},{
+  "Name": "node_of_gpu_0/res4_0_branch2c_1 + node_of_gpu_0/res4_0_branch2c_bn_1 + node_of_gpu_0/res4_0_branch2c_bn_2 + node_of_gpu_0/res4_0_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res4_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res4_1_branch2a_1 + node_of_gpu_0/res4_1_branch2a_bn_1 + node_of_gpu_0/res4_1_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res4_1_branch2b_1 + node_of_gpu_0/res4_1_branch2b_bn_1 + node_of_gpu_0/res4_1_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 589824},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res4_1_branch2c_1 + node_of_gpu_0/res4_1_branch2c_bn_1 + node_of_gpu_0/res4_1_branch2c_bn_2 + node_of_gpu_0/res4_1_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res4_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res4_2_branch2a_1 + node_of_gpu_0/res4_2_branch2a_bn_1 + node_of_gpu_0/res4_2_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res4_2_branch2b_1 + node_of_gpu_0/res4_2_branch2b_bn_1 + node_of_gpu_0/res4_2_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 589824},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res4_2_branch2c_1 + node_of_gpu_0/res4_2_branch2c_bn_1 + node_of_gpu_0/res4_2_branch2c_bn_2 + node_of_gpu_0/res4_2_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res4_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res4_3_branch2a_1 + node_of_gpu_0/res4_3_branch2a_bn_1 + node_of_gpu_0/res4_3_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_3_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res4_3_branch2b_1 + node_of_gpu_0/res4_3_branch2b_bn_1 + node_of_gpu_0/res4_3_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_3_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_3_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 589824},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res4_3_branch2c_1 + node_of_gpu_0/res4_3_branch2c_bn_1 + node_of_gpu_0/res4_3_branch2c_bn_2 + node_of_gpu_0/res4_3_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_3_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res4_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_3_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res4_4_branch2a_1 + node_of_gpu_0/res4_4_branch2a_bn_1 + node_of_gpu_0/res4_4_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_3_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_4_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res4_4_branch2b_1 + node_of_gpu_0/res4_4_branch2b_bn_1 + node_of_gpu_0/res4_4_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_4_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_4_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 589824},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res4_4_branch2c_1 + node_of_gpu_0/res4_4_branch2c_bn_1 + node_of_gpu_0/res4_4_branch2c_bn_2 + node_of_gpu_0/res4_4_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_4_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res4_3_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_4_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res4_5_branch2a_1 + node_of_gpu_0/res4_5_branch2a_bn_1 + node_of_gpu_0/res4_5_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_4_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res4_5_branch2b_1 + node_of_gpu_0/res4_5_branch2b_bn_1 + node_of_gpu_0/res4_5_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 256,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 589824},
+  "Bias": {"Type": "Float", "Count": 256},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res4_5_branch2c_1 + node_of_gpu_0/res4_5_branch2c_bn_1 + node_of_gpu_0/res4_5_branch2c_bn_2 + node_of_gpu_0/res4_5_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,256,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res4_4_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1024,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 262144},
+  "Bias": {"Type": "Float", "Count": 1024},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0xc22b2f91e37e472a"
+},{
+  "Name": "node_of_gpu_0/res5_0_branch2a_1 + node_of_gpu_0/res5_0_branch2a_bn_1 + node_of_gpu_0/res5_0_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 524288},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/res5_0_branch2b_1 + node_of_gpu_0/res5_0_branch2b_bn_1 + node_of_gpu_0/res5_0_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_0_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [2,2],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 2359296},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res5_0_branch1_1 + node_of_gpu_0/res5_0_branch1_bn_1",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res4_5_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,1024,14,14],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [2,2],
+  "Dilation": [1,1],
+  "OutMaps": 2048,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 2097152},
+  "Bias": {"Type": "Float", "Count": 2048},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "HasBias": 1,
+  "HasReLU": 0,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_t1r1s1",
+  "TacticValue": "0x311b82feb19aef19"
+},{
+  "Name": "node_of_gpu_0/res5_0_branch2c_1 + node_of_gpu_0/res5_0_branch2c_bn_1 + node_of_gpu_0/res5_0_branch2c_bn_2 + node_of_gpu_0/res5_0_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_0_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res5_0_branch1_bn_1",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 2048,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 1048576},
+  "Bias": {"Type": "Float", "Count": 2048},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/res5_1_branch2a_1 + node_of_gpu_0/res5_1_branch2a_bn_1 + node_of_gpu_0/res5_1_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 1048576},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res5_1_branch2b_1 + node_of_gpu_0/res5_1_branch2b_bn_1 + node_of_gpu_0/res5_1_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_1_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 2359296},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res5_1_branch2c_1 + node_of_gpu_0/res5_1_branch2c_bn_1 + node_of_gpu_0/res5_1_branch2c_bn_2 + node_of_gpu_0/res5_1_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_1_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res5_0_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 2048,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 1048576},
+  "Bias": {"Type": "Float", "Count": 2048},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/res5_2_branch2a_1 + node_of_gpu_0/res5_2_branch2a_bn_1 + node_of_gpu_0/res5_2_branch2a_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 1048576},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x3912ca79eb9a8be1"
+},{
+  "Name": "node_of_gpu_0/res5_2_branch2b_1 + node_of_gpu_0/res5_2_branch2b_bn_1 + node_of_gpu_0/res5_2_branch2b_bn_2",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_2_branch2a_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [3,3],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [1,1],
+  "PostPadding": [1,1],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 512,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 2359296},
+  "Bias": {"Type": "Float", "Count": 512},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x32x64_stage6_warpsize2x1x1_g1_tensor16x8x32_t1r3s3",
+  "TacticValue": "0x4749124f62d8bd23"
+},{
+  "Name": "node_of_gpu_0/res5_2_branch2c_1 + node_of_gpu_0/res5_2_branch2c_bn_1 + node_of_gpu_0/res5_2_branch2c_bn_2 + node_of_gpu_0/res5_2_branch2c_bn_3",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_2_branch2b_bn_2",
+    "Location": "Device",
+    "Dimensions": [1,512,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  },
+  {
+    "Name": "gpu_0/res5_1_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/res5_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 2048,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 1048576},
+  "Bias": {"Type": "Float", "Count": 2048},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 1,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "RELU",
+  "HasBias": 1,
+  "HasReLU": 1,
+  "TacticName": "sm80_xmma_fprop_implicit_gemm_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize32x64x64_stage6_warpsize2x2x1_g1_tensor16x8x32_simple_t1r1s1",
+  "TacticValue": "0x31de506085a332d4"
+},{
+  "Name": "node_of_gpu_0/pool5_1",
+  "LayerType": "CaskPooling",
+  "Inputs": [
+  {
+    "Name": "gpu_0/res5_2_branch2c_bn_3",
+    "Location": "Device",
+    "Dimensions": [1,2048,7,7],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/pool5_1",
+    "Location": "Device",
+    "Dimensions": [1,2048,1,1],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "ParameterType": "Pooling",
+  "PoolingType": "AVERAGE",
+  "WindowSize": [7,7],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "BlendFactor": 0,
+  "AverageCountExcludesPadding": 1,
+  "TacticName": "sm72_xmma_pooling_IMMA_NCxHW32_gap",
+  "TacticValue": "0xa3a1a62d21de759d"
+},{
+  "Name": "Reformatting CopyNode for Input Tensor 0 to node_of_gpu_0/pred_1",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "gpu_0/pool5_1",
+    "Location": "Device",
+    "Dimensions": [1,2048,1,1],
+    "Format/Datatype": "Thirty-two wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to node_of_gpu_0/pred_1",
+    "Location": "Device",
+    "Dimensions": [1,2048,1,1],
+    "Format/Datatype": "Four wide channel vectorized row major Int8 format"
+  }],
+  "TacticValue": "0x0000000000000000"
+},{
+  "Name": "node_of_gpu_0/pred_1",
+  "LayerType": "CaskConvolution",
+  "Inputs": [
+  {
+    "Name": "Reformatted Input Tensor 0 to node_of_gpu_0/pred_1",
+    "Location": "Device",
+    "Dimensions": [1,2048,1,1],
+    "Format/Datatype": "Four wide channel vectorized row major Int8 format"
+  }],
+  "Outputs": [
+  {
+    "Name": "node_of_gpu_0/pred_1_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,1000,1,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "Convolution",
+  "Kernel": [1,1],
+  "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+  "PrePadding": [0,0],
+  "PostPadding": [0,0],
+  "Stride": [1,1],
+  "Dilation": [1,1],
+  "OutMaps": 1000,
+  "Groups": 1,
+  "Weights": {"Type": "Int8", "Count": 2048000},
+  "Bias": {"Type": "Float", "Count": 1000},
+  "HasSparseWeights": 0,
+  "HasDynamicFilter": 0,
+  "HasDynamicBias": 0,
+  "HasResidual": 0,
+  "ConvXAsActInputIdx": -1,
+  "BiasAsActInputIdx": -1,
+  "ResAsActInputIdx": -1,
+  "Activation": "NONE",
+  "HasBias": 1,
+  "HasReLU": 0,
+  "TacticName": "sm70_xmma_fprop_conv1x1_i8f32_f32_f32_nchw_vect_c_4kcrs_vect_c_4_nchw_simt_small_batch_bias_relu",
+  "TacticValue": "0xc073b0053ce90eac"
+},{
+  "Name": "reshape_after_node_of_gpu_0/pred_1",
+  "LayerType": "NoOp",
+  "Inputs": [
+  {
+    "Name": "node_of_gpu_0/pred_1_out_tensor",
+    "Location": "Device",
+    "Dimensions": [1,1000,1,1],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/pred_1",
+    "Location": "Device",
+    "Dimensions": [1,1000],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "TacticValue": "0x0000000000000000"
+},{
+  "Name": "(Unnamed Layer* 180) [Softmax]",
+  "LayerType": "CudaSoftMax",
+  "Inputs": [
+  {
+    "Name": "gpu_0/pred_1",
+    "Location": "Device",
+    "Dimensions": [1,1000],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "Outputs": [
+  {
+    "Name": "gpu_0/softmax_1",
+    "Location": "Device",
+    "Dimensions": [1,1000],
+    "Format/Datatype": "Row major linear FP32"
+  }],
+  "ParameterType": "SoftMax",
+  "Axes": 2,
+  "HasLog": 0,
+  "TacticValue": "0x00000000000003e9"
+}],
+"Bindings": ["gpu_0/data_0"
+,"gpu_0/softmax_1"
+]}

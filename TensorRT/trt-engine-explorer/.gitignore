@@ -116,12 +116,12 @@ dmypy.json
 
 # Dot
 *.gv
-*.svg
+#*.svg
 
 # Other trex artifacts
 *.xlsx
 *.engine
-*.ipynb
-*.png
+#*.ipynb
+#*.png
 *.onnx
 
