@@ -8,7 +8,7 @@ An engine plan file is a serialized TensorRT engine format. It contains informat
 `trex` is useful for initial model performance debugging, visualization of plan graphs, and for understanding the characteristics of an engine plan. <b>For in-depth performance analysis, [Nvidia &reg; Nsight Systems &trade;](https://developer.nvidia.com/nsight-systems) is the recommended performance analysis tool.</b>
 
 # Source repo
-
+https://github.com/NVIDIA/TensorRT/tree/release/8.6/tools/experimental/trt-engine-explorer
 
 # Features
 The `trex` package contains an API and Jupyter notebooks for viewing and inspecting TensorRT engine-plan files and profiling data.
